@@ -91,12 +91,26 @@ def get_bot_username():
 # ================= HELPER FUNCTIONS =================
 def tg_api_request(method, data=None):
     url = f"{TELEGRAM_API_URL}/{method}"
+
     try:
-        response = requests.post(url, json=data) if data else requests.get(url)
-        response.raise_for_status()
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"[ERROR] API request failed: {e}")
+        if data:
+            response = requests.post(url, json=data, timeout=35)
+        else:
+            response = requests.get(url, timeout=10)
+
+        result = response.json()
+
+        if not response.ok or not result.get("ok"):
+            print(
+                f"[TELEGRAM ERROR] {method}: "
+                f"{result.get('error_code')} - "
+                f"{result.get('description')}"
+            )
+
+        return result
+
+    except Exception as e:
+        print(f"[ERROR] {method}: {e}")
         return None
 
 def send_message(chat_id, text, reply_markup=None, parse_mode=None):
