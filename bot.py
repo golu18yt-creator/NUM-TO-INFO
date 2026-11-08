@@ -7,7 +7,7 @@ import string
 from datetime import datetime
 
 # ================= CONFIGURATION =================
-BOT_TOKEN = os.getenv("9135374998:AAGdwfVNi3u8m6sJMZzHBzwCjV7IxwvWBVQ", "")
+BOT_TOKEN = os.getenv("9135374998:AAFTxNiFx17eYMoKfdcELyUcKMYZoRwLLN4", "")
 OWNER_ID = 8927308711
 EXTERNAL_API_BASE = "https://paid-flix-num-info-api.alphamovies.workers.dev/"
 API_KEY = "premium_key_99"
